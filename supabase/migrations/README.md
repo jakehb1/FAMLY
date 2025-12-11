@@ -16,6 +16,7 @@ This directory contains database migrations for the Famly app.
 10. `create_triggers_and_functions` - Creates triggers and helper functions
 11. `enable_rls_policies` - Enables Row Level Security and creates policies
 12. `create_nearby_families_function` - Creates function for querying nearby families
+13. `setup_auth_database` - Sets up secure auth functions and automatic family profile creation
 
 ## Storage Buckets
 
