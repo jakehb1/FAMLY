@@ -16,8 +16,7 @@ export default function WelcomeScreen() {
         <View
           className="w-40 h-1 rounded-full mb-6 self-center"
           style={{
-            backgroundColor: "transparent",
-            backgroundImage: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 50%, #F97316 100%)",
+            backgroundColor: "#8B5CF6",
           }}
         />
         <Text className="text-muted text-lg leading-7 text-center">

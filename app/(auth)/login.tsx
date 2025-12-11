@@ -100,8 +100,7 @@ export default function LoginScreen() {
           <View
             className="w-32 h-1 rounded-full mb-6"
             style={{
-              backgroundColor: "transparent",
-              backgroundImage: "linear-gradient(90deg, #EC4899 0%, #F97316 100%)",
+              backgroundColor: "#EC4899",
             }}
           />
           <Text className="text-muted text-base text-center">

@@ -1,4 +1,4 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
+// Navigation types for Expo Router (no @react-navigation/native needed)
 
 export type RootStackParamList = {
   index: undefined;
