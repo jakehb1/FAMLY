@@ -46,7 +46,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "build": {
+        "babel": {
+          "include": ["@expo/metro-runtime"]
+        }
+      }
     },
     "plugins": [
       "expo-router",
