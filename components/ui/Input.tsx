@@ -10,6 +10,9 @@ interface InputProps {
   maxLength?: number;
   error?: string;
   className?: string;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad" | "number-pad";
+  autoCapitalize?: "none" | "sentences" | "words" | "characters";
+  autoComplete?: string;
 }
 
 export default function Input({
