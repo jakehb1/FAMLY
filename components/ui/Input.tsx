@@ -25,6 +25,9 @@ export default function Input({
   maxLength,
   error,
   className = "",
+  keyboardType = "default",
+  autoCapitalize = "sentences",
+  autoComplete,
 }: InputProps) {
   return (
     <View className={`mb-4 ${className}`}>
@@ -39,6 +42,9 @@ export default function Input({
         secureTextEntry={secureTextEntry}
         multiline={multiline}
         maxLength={maxLength}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        autoComplete={autoComplete as any}
         className={`bg-surface border ${
           error ? "border-red-500" : "border-gray-200"
         } rounded-xl px-4 py-3 text-primary ${
