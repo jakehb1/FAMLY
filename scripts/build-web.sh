@@ -8,6 +8,13 @@ if [ -z "$EXPO_PUBLIC_SUPABASE_URL" ]; then
   echo "Warning: EXPO_PUBLIC_SUPABASE_URL not set"
 fi
 
+# Create NativeWind JSX runtime shim if it doesn't exist
+if [ ! -f "node_modules/nativewind/jsx-runtime.js" ]; then
+  echo "Creating NativeWind JSX runtime shim..."
+  mkdir -p node_modules/nativewind
+  echo 'module.exports = require("react/jsx-runtime");' > node_modules/nativewind/jsx-runtime.js
+fi
+
 # For Expo Router with Metro bundler, use expo export (NOT expo export:web)
 # expo export:web requires Webpack, but we're using Metro
 echo "Running expo export for web platform..."

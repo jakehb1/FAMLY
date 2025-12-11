@@ -5,7 +5,7 @@ module.exports = {
     "./app/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
-  presets: [],
+  // NativeWind v2 doesn't require a preset
   theme: {
     extend: {
       colors: {
