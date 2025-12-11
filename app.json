@@ -15,7 +15,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.famly.app"
+      "bundleIdentifier": "com.famly.app",
+      "usesAppleSignIn": true
     },
     "android": {
       "adaptiveIcon": {
