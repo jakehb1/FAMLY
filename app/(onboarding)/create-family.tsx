@@ -13,6 +13,7 @@ import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/authStore";
+import { colors } from "@/constants/colors";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
@@ -154,16 +155,20 @@ export default function CreateFamilyScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1 bg-background"
+      className="flex-1"
+      style={{ backgroundColor: colors.background }}
     >
       <ScrollView
-        contentContainerClassName="px-6 py-8"
+        contentContainerStyle={{ paddingHorizontal: 24, paddingVertical: 32 }}
         keyboardShouldPersistTaps="handled"
       >
-        <Text className="text-primary text-3xl font-bold mb-2">
+        <Text
+          className="text-3xl font-bold mb-2"
+          style={{ color: colors.primary }}
+        >
           Create Your Family Profile
         </Text>
-        <Text className="text-muted text-base mb-8">
+        <Text className="text-base mb-8" style={{ color: colors.muted }}>
           Tell us about your family
         </Text>
 
@@ -181,7 +186,12 @@ export default function CreateFamilyScreen() {
                 ]
               );
             }}
-            className="w-32 h-32 rounded-full bg-gray-200 items-center justify-center overflow-hidden"
+            className="w-32 h-32 rounded-full items-center justify-center overflow-hidden"
+            style={{
+              backgroundColor: colors.surface,
+              borderWidth: 2,
+              borderColor: "rgba(139, 92, 246, 0.5)",
+            }}
           >
             {photoUri ? (
               <Image
@@ -190,11 +200,13 @@ export default function CreateFamilyScreen() {
                 resizeMode="cover"
               />
             ) : (
-              <Text className="text-muted">Add Photo</Text>
+              <Text style={{ color: colors.muted }}>Add Photo</Text>
             )}
           </TouchableOpacity>
           {uploading && (
-            <Text className="text-muted text-sm mt-2">Uploading...</Text>
+            <Text className="text-sm mt-2" style={{ color: colors.muted }}>
+              Uploading...
+            </Text>
           )}
         </View>
 

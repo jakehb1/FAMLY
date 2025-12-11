@@ -11,6 +11,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/authStore";
 import { useFamilyStore } from "@/stores/familyStore";
 import { useLocation } from "@/hooks/useLocation";
+import { colors } from "@/constants/colors";
 import Button from "@/components/ui/Button";
 import { getCurrentLocation } from "@/lib/location";
 
@@ -80,37 +81,64 @@ export default function SetLocationScreen() {
   };
 
   return (
-    <ScrollView contentContainerClassName="px-6 py-8 flex-1">
-      <Text className="text-primary text-3xl font-bold mb-2">
+    <ScrollView
+      contentContainerStyle={{
+        paddingHorizontal: 24,
+        paddingVertical: 32,
+        flexGrow: 1,
+      }}
+      style={{ backgroundColor: colors.background }}
+    >
+      <Text
+        className="text-3xl font-bold mb-2"
+        style={{ color: colors.primary }}
+      >
         Set Your Location
       </Text>
-      <Text className="text-muted text-base mb-8">
+      <Text className="text-base mb-8" style={{ color: colors.muted }}>
         We'll use your location to find nearby families. Your exact location is
         never shared—we'll blur it by your privacy radius.
       </Text>
 
       {locationLoading ? (
         <View className="flex-1 items-center justify-center py-12">
-          <ActivityIndicator size="large" color="#1A1A1A" />
-          <Text className="text-muted mt-4">Getting your location...</Text>
+          <ActivityIndicator size="large" color={colors.gradient.purple} />
+          <Text className="mt-4" style={{ color: colors.muted }}>
+            Getting your location...
+          </Text>
         </View>
       ) : latitude && longitude ? (
         <View className="mb-8">
-          <View className="bg-surface rounded-xl p-4 mb-6 border border-gray-200">
-            <Text className="text-primary font-semibold mb-2">Location Found</Text>
+          <View
+            className="rounded-2xl p-4 mb-6"
+            style={{
+              backgroundColor: colors.surface,
+              borderWidth: 1,
+              borderColor: "rgba(139, 92, 246, 0.3)",
+            }}
+          >
+            <Text
+              className="font-semibold mb-2"
+              style={{ color: colors.primary }}
+            >
+              Location Found
+            </Text>
             {city && (
-              <Text className="text-muted">{city}</Text>
+              <Text style={{ color: colors.muted }}>{city}</Text>
             )}
             {zip && (
-              <Text className="text-muted">{zip}</Text>
+              <Text style={{ color: colors.muted }}>{zip}</Text>
             )}
-            <Text className="text-muted text-sm mt-2">
+            <Text className="text-sm mt-2" style={{ color: colors.muted }}>
               Coordinates: {latitude.toFixed(6)}, {longitude.toFixed(6)}
             </Text>
           </View>
 
           <View className="mb-6">
-            <Text className="text-primary text-base font-semibold mb-4">
+            <Text
+              className="text-base font-semibold mb-4"
+              style={{ color: colors.primary }}
+            >
               Privacy Radius: {privacyRadius}m
             </Text>
             <View className="flex-row items-center gap-4">

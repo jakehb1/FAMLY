@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/authStore";
 import { useFamilyStore } from "@/stores/familyStore";
+import { colors } from "@/constants/colors";
 import Button from "@/components/ui/Button";
 import { INTERESTS } from "@/constants/interests";
 
@@ -56,11 +57,17 @@ export default function SelectInterestsScreen() {
   };
 
   return (
-    <ScrollView contentContainerClassName="px-6 py-8">
-      <Text className="text-primary text-3xl font-bold mb-2">
+    <ScrollView
+      contentContainerStyle={{ paddingHorizontal: 24, paddingVertical: 32 }}
+      style={{ backgroundColor: colors.background }}
+    >
+      <Text
+        className="text-3xl font-bold mb-2"
+        style={{ color: colors.primary }}
+      >
         Select Your Interests
       </Text>
-      <Text className="text-muted text-base mb-8">
+      <Text className="text-base mb-8" style={{ color: colors.muted }}>
         Choose activities and interests your family enjoys. This helps us match
         you with like-minded families.
       </Text>
@@ -70,18 +77,23 @@ export default function SelectInterestsScreen() {
           <TouchableOpacity
             key={interest}
             onPress={() => toggleInterest(interest)}
-            className={`px-4 py-3 rounded-full border ${
-              selectedInterests.includes(interest)
-                ? "bg-secondary border-secondary"
-                : "bg-surface border-gray-200"
-            }`}
+            className="px-4 py-3 rounded-full border"
+            style={{
+              backgroundColor: selectedInterests.includes(interest)
+                ? colors.gradient.pink
+                : colors.surface,
+              borderColor: selectedInterests.includes(interest)
+                ? colors.gradient.pink
+                : "rgba(236, 72, 153, 0.3)",
+            }}
           >
             <Text
-              className={
-                selectedInterests.includes(interest)
-                  ? "text-white font-medium"
-                  : "text-primary"
-              }
+              style={{
+                color: selectedInterests.includes(interest)
+                  ? "#FFFFFF"
+                  : colors.primary,
+                fontWeight: selectedInterests.includes(interest) ? "600" : "400",
+              }}
             >
               {interest}
             </Text>
@@ -89,11 +101,21 @@ export default function SelectInterestsScreen() {
         ))}
       </View>
 
-      <View className="bg-surface rounded-xl p-4 mb-6 border border-gray-200">
-        <Text className="text-primary font-semibold mb-2">
+      <View
+        className="rounded-2xl p-4 mb-6"
+        style={{
+          backgroundColor: colors.surface,
+          borderWidth: 1,
+          borderColor: "rgba(139, 92, 246, 0.3)",
+        }}
+      >
+        <Text
+          className="font-semibold mb-2"
+          style={{ color: colors.primary }}
+        >
           Selected: {selectedInterests.length}
         </Text>
-        <Text className="text-muted text-sm">
+        <Text className="text-sm" style={{ color: colors.muted }}>
           {selectedInterests.length > 0
             ? selectedInterests.join(", ")
             : "No interests selected"}

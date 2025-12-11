@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { colors } from "@/constants/colors";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { Child } from "@/types";
@@ -106,31 +107,46 @@ export default function AddChildrenScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1 bg-background"
+      className="flex-1"
+      style={{ backgroundColor: colors.background }}
     >
-      <ScrollView contentContainerClassName="px-6 py-8">
-        <Text className="text-primary text-3xl font-bold mb-2">
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingVertical: 32 }}>
+        <Text
+          className="text-3xl font-bold mb-2"
+          style={{ color: colors.primary }}
+        >
           Add Your Children
         </Text>
-        <Text className="text-muted text-base mb-6">
+        <Text className="text-base mb-6" style={{ color: colors.muted }}>
           Tell us about your kids (first names only)
         </Text>
 
         {children.map((child, index) => (
           <View
             key={index}
-            className="bg-surface rounded-xl p-4 mb-4 border border-gray-200"
+            className="rounded-2xl p-4 mb-4"
+            style={{
+              backgroundColor: colors.surface,
+              borderWidth: 1,
+              borderColor: "rgba(139, 92, 246, 0.3)",
+            }}
           >
             <View className="flex-row items-center justify-between mb-4">
-              <Text className="text-primary text-lg font-semibold">
+              <Text
+                className="text-lg font-semibold"
+                style={{ color: colors.primary }}
+              >
                 Child {index + 1}
               </Text>
               {children.length > 1 && (
                 <TouchableOpacity
                   onPress={() => removeChild(index)}
-                  className="px-3 py-1 bg-red-50 rounded-lg"
+                  className="px-3 py-1 rounded-lg"
+                  style={{ backgroundColor: "rgba(239, 68, 68, 0.2)" }}
                 >
-                  <Text className="text-red-600 text-sm">Remove</Text>
+                  <Text className="text-sm" style={{ color: "#EF4444" }}>
+                    Remove
+                  </Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -168,7 +184,10 @@ export default function AddChildrenScreen() {
             </View>
 
             <View className="mb-4">
-              <Text className="text-primary text-sm font-medium mb-2">
+              <Text
+                className="text-sm font-medium mb-2"
+                style={{ color: colors.primary }}
+              >
                 School Age Group
               </Text>
               <View className="flex-row flex-wrap gap-2">
@@ -176,18 +195,26 @@ export default function AddChildrenScreen() {
                   <TouchableOpacity
                     key={group}
                     onPress={() => updateChild(index, "school_age_group", group)}
-                    className={`px-4 py-2 rounded-lg border ${
-                      child.school_age_group === group
-                        ? "bg-accent border-accent"
-                        : "bg-surface border-gray-200"
-                    }`}
+                    className="px-4 py-2 rounded-xl border"
+                    style={{
+                      backgroundColor:
+                        child.school_age_group === group
+                          ? colors.gradient.purple
+                          : colors.surface,
+                      borderColor:
+                        child.school_age_group === group
+                          ? colors.gradient.purple
+                          : "rgba(139, 92, 246, 0.3)",
+                    }}
                   >
                     <Text
-                      className={
-                        child.school_age_group === group
-                          ? "text-white font-medium"
-                          : "text-primary"
-                      }
+                      style={{
+                        color:
+                          child.school_age_group === group
+                            ? "#FFFFFF"
+                            : colors.primary,
+                        fontWeight: child.school_age_group === group ? "600" : "400",
+                      }}
                     >
                       {group.charAt(0).toUpperCase() + group.slice(1)}
                     </Text>
@@ -197,7 +224,10 @@ export default function AddChildrenScreen() {
             </View>
 
             <View className="mb-4">
-              <Text className="text-primary text-sm font-medium mb-2">
+              <Text
+                className="text-sm font-medium mb-2"
+                style={{ color: colors.primary }}
+              >
                 Interests (Optional)
               </Text>
               <View className="flex-row flex-wrap gap-2">
@@ -205,18 +235,23 @@ export default function AddChildrenScreen() {
                   <TouchableOpacity
                     key={interest}
                     onPress={() => toggleInterest(index, interest)}
-                    className={`px-3 py-1.5 rounded-full border ${
-                      child.interests?.includes(interest)
-                        ? "bg-secondary border-secondary"
-                        : "bg-surface border-gray-200"
-                    }`}
+                    className="px-3 py-1.5 rounded-full border"
+                    style={{
+                      backgroundColor: child.interests?.includes(interest)
+                        ? colors.gradient.pink
+                        : colors.surface,
+                      borderColor: child.interests?.includes(interest)
+                        ? colors.gradient.pink
+                        : "rgba(236, 72, 153, 0.3)",
+                    }}
                   >
                     <Text
-                      className={
-                        child.interests?.includes(interest)
-                          ? "text-white text-sm"
-                          : "text-primary text-sm"
-                      }
+                      className="text-sm"
+                      style={{
+                        color: child.interests?.includes(interest)
+                          ? "#FFFFFF"
+                          : colors.primary,
+                      }}
                     >
                       {interest}
                     </Text>
@@ -229,9 +264,20 @@ export default function AddChildrenScreen() {
 
         <TouchableOpacity
           onPress={addChild}
-          className="mb-6 py-3 border-2 border-dashed border-gray-300 rounded-xl items-center"
+          className="mb-6 py-3 rounded-xl items-center"
+          style={{
+            borderWidth: 2,
+            borderStyle: "dashed",
+            borderColor: "rgba(139, 92, 246, 0.5)",
+            backgroundColor: "transparent",
+          }}
         >
-          <Text className="text-accent font-semibold">+ Add Another Child</Text>
+          <Text
+            className="font-semibold"
+            style={{ color: colors.gradient.purple }}
+          >
+            + Add Another Child
+          </Text>
         </TouchableOpacity>
 
         <Button

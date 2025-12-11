@@ -30,9 +30,14 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center bg-background">
-        <ActivityIndicator size="large" color="#1A1A1A" />
-        <Text className="text-muted mt-4">Loading...</Text>
+      <View
+        className="flex-1 items-center justify-center"
+        style={{ backgroundColor: "#1A0B2E" }}
+      >
+        <ActivityIndicator size="large" color="#8B5CF6" />
+        <Text className="mt-4" style={{ color: "#9CA3AF" }}>
+          Loading...
+        </Text>
       </View>
     );
   }
