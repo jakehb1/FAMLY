@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npx expo export:web",
-  "outputDirectory": ".expo/web-build",
+  "buildCommand": "npx expo export -p web",
+  "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": null,
   "rewrites": [
@@ -12,7 +12,7 @@
   ],
   "headers": [
     {
-      "source": "/static/(.*)",
+      "source": "/_expo/static/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
