@@ -4,7 +4,7 @@ import { initializeAuth } from "@/lib/auth";
 import { initializeDeepLinking } from "@/lib/deep-linking";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import "../global.css";
+// NativeWind v2 handles CSS via Babel plugin, no need to import global.css
 
 export default function RootLayout() {
   useEffect(() => {
