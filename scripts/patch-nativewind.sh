@@ -31,6 +31,8 @@ const pluginPack = (options) => {
 };
 pluginPack.postcss = true;
 exports.default = pluginPack;
+module.exports = pluginPack;
+module.exports.default = pluginPack;
 EOFPATCH
   echo "✓ NativeWind PostCSS patched successfully"
 fi
