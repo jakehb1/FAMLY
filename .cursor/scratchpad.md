@@ -604,13 +604,35 @@ Clan is a mobile iOS app designed to help families discover and connect with oth
 
 ## Executor's Feedback or Assistance Requests
 
-_This section will be populated by the Executor as work progresses._
+### Current Issue (2024-12-19)
+**npm cache permission issue:** The npm cache folder has root-owned files that need to be fixed. The user needs to run:
+```bash
+sudo chown -R 501:20 "/Users/jakehbradley/.npm"
+```
+After fixing this, we can proceed with `npm install` to install all dependencies.
+
+**GitHub Repository:** Successfully connected to https://github.com/jakehb1/FAMLY.git and pushed initial commit.
 
 ---
 
 ## Lessons
 
-_This section will be populated with learnings, fixes, and reusable information as the project progresses._
+### Technical Decisions
+- Using Expo for faster iteration and cross-platform foundation
+- Supabase for backend (auth, database, real-time, storage) - reduces infrastructure complexity
+- Zustand for state management - lightweight and simple
+- NativeWind for styling - familiar Tailwind syntax
+- PostGIS for efficient geospatial queries
+
+### Known Constraints
+- iOS-only for v1.0
+- No media in messages for v1.0
+- Events feature deferred to v1.1
+- ID verification deferred to future version
+
+### Setup Issues Encountered
+- **npm cache permissions:** If npm cache has root-owned files, run `sudo chown -R 501:20 "/Users/jakehbradley/.npm"` to fix
+- **Git initialization:** Make sure to initialize git in the project directory, not parent directory
 
 ### Technical Decisions
 - Using Expo for faster iteration and cross-platform foundation
