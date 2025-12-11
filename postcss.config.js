@@ -1,7 +1,3 @@
-module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
+// Use NativeWind's PostCSS configuration
+module.exports = require("nativewind/postcss");
 

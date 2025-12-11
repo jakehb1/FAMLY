@@ -17,8 +17,9 @@ fi
 
 # For Expo Router with Metro bundler, use expo export (NOT expo export:web)
 # expo export:web requires Webpack, but we're using Metro
+# Disable CSS processing during export to avoid PostCSS async plugin issues
 echo "Running expo export for web platform..."
-npx expo export --platform web --output-dir dist
+EXPO_NO_CSS=1 npx expo export --platform web --output-dir dist || npx expo export --platform web --output-dir dist
 
 # Expo may create platform-specific subdirectories
 # Check for common output structures

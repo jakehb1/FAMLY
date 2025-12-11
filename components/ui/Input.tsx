@@ -38,7 +38,7 @@ export default function Input({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor="#6B6B6B"
+        placeholderTextColor="#9CA3AF"
         secureTextEntry={secureTextEntry}
         multiline={multiline}
         maxLength={maxLength}
@@ -46,10 +46,13 @@ export default function Input({
         autoCapitalize={autoCapitalize}
         autoComplete={autoComplete as any}
         className={`bg-surface border ${
-          error ? "border-red-500" : "border-gray-200"
-        } rounded-xl px-4 py-3 text-primary ${
-          multiline ? "min-h-[100px]" : "h-12"
+          error ? "border-red-500" : "border-purple-500/30"
+        } rounded-2xl px-4 py-3 text-primary ${
+          multiline ? "min-h-[100px]" : "h-14"
         }`}
+        style={{
+          borderColor: error ? "#EF4444" : "rgba(139, 92, 246, 0.3)",
+        }}
       />
       {error && (
         <Text className="text-red-500 text-sm mt-1">{error}</Text>

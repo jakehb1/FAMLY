@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { useAuthStore } from "@/stores/authStore";
 import { initializeAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
+import { colors } from "@/constants/colors";
 
 export default function Index() {
   const router = useRouter();
@@ -54,9 +55,14 @@ export default function Index() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center bg-background">
-      <ActivityIndicator size="large" color="#1A1A1A" />
-      <Text className="text-muted mt-4">Loading...</Text>
+    <View
+      className="flex-1 items-center justify-center"
+      style={{ backgroundColor: colors.background }}
+    >
+      <ActivityIndicator size="large" color={colors.gradient.purple} />
+      <Text className="text-muted mt-4" style={{ color: colors.muted }}>
+        Loading...
+      </Text>
     </View>
   );
 }

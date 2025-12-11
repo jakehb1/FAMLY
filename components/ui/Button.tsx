@@ -1,4 +1,5 @@
-import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
+import { TouchableOpacity, Text, ActivityIndicator, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "@/constants/colors";
 
 interface ButtonProps {
@@ -18,25 +19,62 @@ export default function Button({
   loading = false,
   className = "",
 }: ButtonProps) {
-  const variantStyles = {
-    primary: "bg-primary",
-    secondary: "bg-secondary",
-    accent: "bg-accent",
+  const getGradientColors = () => {
+    switch (variant) {
+      case "primary":
+        return [colors.gradient.purple, colors.gradient.pink];
+      case "secondary":
+        return [colors.gradient.pink, colors.gradient.orange];
+      case "accent":
+        return [colors.gradient.orange, colors.gradient.yellow];
+      default:
+        return [colors.gradient.purple, colors.gradient.pink];
+    }
   };
 
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled || loading}
-      className={`${variantStyles[variant]} px-6 py-4 rounded-xl items-center justify-center ${
+      className={`rounded-2xl overflow-hidden ${
         disabled || loading ? "opacity-50" : ""
       } ${className}`}
+      activeOpacity={0.8}
     >
-      {loading ? (
-        <ActivityIndicator color="#FFFFFF" />
-      ) : (
-        <Text className="text-white font-semibold text-base">{title}</Text>
-      )}
+      <View
+        className="px-6 py-4 rounded-2xl"
+        style={{
+          borderWidth: 2,
+          borderColor: variant === "primary" 
+            ? colors.gradient.purple 
+            : variant === "secondary"
+            ? colors.gradient.pink
+            : colors.gradient.orange,
+          backgroundColor: disabled ? "transparent" : "transparent",
+        }}
+      >
+        <View
+          className="absolute inset-0 rounded-2xl"
+          style={{
+            backgroundColor: variant === "primary" 
+              ? colors.gradient.purple 
+              : variant === "secondary"
+              ? colors.gradient.pink
+              : colors.gradient.orange,
+            opacity: 0.2,
+          }}
+        />
+        <View className="items-center justify-center flex-row">
+          {loading ? (
+            <ActivityIndicator color="#FFFFFF" />
+          ) : (
+            <>
+              <Text className="text-white font-bold text-base">{title}</Text>
+              <Text className="text-white ml-2 text-lg">→</Text>
+            </>
+          )}
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }

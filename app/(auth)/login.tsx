@@ -6,9 +6,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { signInWithEmail, signInWithApple } from "@/lib/auth";
+import { colors } from "@/constants/colors";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
@@ -78,18 +80,32 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1 bg-background"
+      className="flex-1"
+      style={{ backgroundColor: colors.background }}
     >
       <ScrollView
-        contentContainerClassName="flex-grow justify-center px-6 py-12"
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "center",
+          paddingHorizontal: 24,
+          paddingVertical: 48,
+        }}
         keyboardShouldPersistTaps="handled"
       >
-        <View className="mb-8">
-          <Text className="text-primary text-3xl font-bold mb-2">
-            Welcome Back
+        <View className="mb-8 items-center">
+          <Text className="text-primary text-4xl font-bold mb-4 text-center">
+            Sign In
           </Text>
-          <Text className="text-muted text-base">
-            Sign in to connect with families in your area
+          {/* Wavy decorative line */}
+          <View
+            className="w-32 h-1 rounded-full mb-6"
+            style={{
+              backgroundColor: "transparent",
+              backgroundImage: "linear-gradient(90deg, #EC4899 0%, #F97316 100%)",
+            }}
+          />
+          <Text className="text-muted text-base text-center">
+            Connect with families in your area
           </Text>
         </View>
 
@@ -126,17 +142,26 @@ export default function LoginScreen() {
         />
 
         <View className="flex-row items-center justify-center mb-6">
-          <View className="flex-1 h-px bg-gray-200" />
-          <Text className="mx-4 text-muted text-sm">OR</Text>
-          <View className="flex-1 h-px bg-gray-200" />
+          <View className="flex-1 h-px" style={{ backgroundColor: "rgba(156, 163, 175, 0.3)" }} />
+          <Text className="mx-4 text-muted text-sm">or Sign In with</Text>
+          <View className="flex-1 h-px" style={{ backgroundColor: "rgba(156, 163, 175, 0.3)" }} />
         </View>
 
-        <Button
-          title="Continue with Apple"
-          onPress={handleAppleSignIn}
-          variant="secondary"
-          disabled={loading}
-        />
+        {/* Social sign-in icons */}
+        <View className="flex-row justify-center items-center gap-4 mb-8">
+          {["G", "O", "X", "📷", "🎵"].map((icon, index) => (
+            <TouchableOpacity
+              key={index}
+              className="w-12 h-12 rounded-full bg-surface items-center justify-center border border-purple-500/30"
+              onPress={() => {
+                // Placeholder for social sign-in
+                if (icon === "G") handleAppleSignIn();
+              }}
+            >
+              <Text className="text-primary text-lg font-semibold">{icon}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         <View className="mt-8 flex-row justify-center">
           <Text className="text-muted">Don't have an account? </Text>
