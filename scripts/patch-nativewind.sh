@@ -32,8 +32,41 @@ const pluginPack = (options) => {
 pluginPack.postcss = true;
 exports.default = pluginPack;
 EOFPATCH
-    echo "✓ NativeWind PostCSS patched successfully"
+  echo "✓ NativeWind PostCSS patched successfully"
+fi
+
+# Also patch extract-styles.js to use sync processing
+EXTRACT_STYLES_FILE="node_modules/nativewind/dist/postcss/extract-styles.js"
+if [ -f "$EXTRACT_STYLES_FILE" ]; then
+  if ! grep -q "Use sync() method for synchronous processing" "$EXTRACT_STYLES_FILE" 2>/dev/null; then
+    echo "Patching extract-styles.js for synchronous PostCSS processing..."
+    # Backup original
+    cp "$EXTRACT_STYLES_FILE" "$EXTRACT_STYLES_FILE.backup" 2>/dev/null || true
+    
+    # Use sed to replace the problematic line
+    sed -i.bak 's/(0, postcss_1.default)(plugins).process(cssInput).css;/(0, postcss_1.default)(plugins).process(cssInput, { from: undefined }).sync();/g' "$EXTRACT_STYLES_FILE" 2>/dev/null || {
+      # If sed fails, use a more robust approach
+      python3 << 'PYTHONPATCH'
+import re
+file_path = "node_modules/nativewind/dist/postcss/extract-styles.js"
+with open(file_path, 'r') as f:
+    content = f.read()
+    
+# Replace the problematic line
+content = content.replace(
+    '(0, postcss_1.default)(plugins).process(cssInput).css;',
+    '(0, postcss_1.default)(plugins).process(cssInput, { from: undefined }).sync();'
+)
+
+with open(file_path, 'w') as f:
+    f.write(content)
+PYTHONPATCH
+    }
+    echo "✓ extract-styles.js patched successfully"
+  else
+    echo "✓ extract-styles.js already patched"
   fi
+fi
 else
   echo "⚠ Warning: NativeWind PostCSS file not found at $PATCH_FILE"
 fi
