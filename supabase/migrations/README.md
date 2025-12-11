@@ -4,19 +4,15 @@ This directory contains database migrations for the Famly app.
 
 ## Applied Migrations
 
-1. `enable_postgis` - Enables PostGIS extension for geospatial queries
-2. `create_families_table` - Creates families table with location support
-3. `create_children_table` - Creates children table
-4. `create_connections_table` - Creates connections table for family connections
-5. `create_conversations_table` - Creates conversations table
-6. `create_messages_table` - Creates messages table
-7. `create_events_table` - Creates events table (for v1.1)
-8. `create_reports_table` - Creates reports table for safety features
-9. `create_blocks_table` - Creates blocks table
-10. `create_triggers_and_functions` - Creates triggers and helper functions
-11. `enable_rls_policies` - Enables Row Level Security and creates policies
-12. `create_nearby_families_function` - Creates function for querying nearby families
-13. `setup_auth_database` - Sets up secure auth functions and automatic family profile creation
+**IMPORTANT: Run migrations in this order:**
+
+1. `20251211172250_initial_schema.sql` - **Run this first!** Creates all base tables (families, children, connections, etc.)
+2. `20251211201115_setup_auth_database.sql` - Sets up secure auth functions and automatic family profile creation
+
+### Migration Details
+
+1. `initial_schema` - Creates all base tables with PostGIS support, indexes, and RLS enabled
+2. `setup_auth_database` - Secures helper functions and adds automatic family profile creation on signup
 
 ## Storage Buckets
 
