@@ -596,9 +596,9 @@ Clan is a mobile iOS app designed to help families discover and connect with oth
 ## Current Status / Progress Tracking
 
 **Current Phase:** Phase 1: Foundation & Setup
-**Current Task:** Task 1.1: Project Initialization
+**Current Task:** Task 1.1: Project Initialization (In Progress)
 **Last Updated:** 2024-12-19
-**GitHub Repo:** FAMLY (to be connected)
+**GitHub Repo:** ✅ Connected to https://github.com/jakehb1/FAMLY.git
 
 ---
 
@@ -633,13 +633,6 @@ After fixing this, we can proceed with `npm install` to install all dependencies
 ### Setup Issues Encountered
 - **npm cache permissions:** If npm cache has root-owned files, run `sudo chown -R 501:20 "/Users/jakehbradley/.npm"` to fix
 - **Git initialization:** Make sure to initialize git in the project directory, not parent directory
-
-### Technical Decisions
-- Using Expo for faster iteration and cross-platform foundation
-- Supabase for backend (auth, database, real-time, storage) - reduces infrastructure complexity
-- Zustand for state management - lightweight and simple
-- NativeWind for styling - familiar Tailwind syntax
-- PostGIS for efficient geospatial queries
 
 ### Known Constraints
 - iOS-only for v1.0
