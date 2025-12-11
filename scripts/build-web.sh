@@ -8,28 +8,32 @@ if [ -z "$EXPO_PUBLIC_SUPABASE_URL" ]; then
   echo "Warning: EXPO_PUBLIC_SUPABASE_URL not set"
 fi
 
-# For Expo Router, we need to use expo export
-# Note: Expo Router with Metro may require different approach
-echo "Running expo export..."
-npx expo export --platform web --output-dir dist 2>&1 || {
-  echo "Error: expo export failed"
-  echo "Trying alternative: expo export without platform flag..."
-  npx expo export --output-dir dist
-}
+# For Expo Router with Metro bundler, use expo export (NOT expo export:web)
+# expo export:web requires Webpack, but we're using Metro
+echo "Running expo export for web platform..."
+npx expo export --platform web --output-dir dist
 
-# Check if dist/web exists (Expo may organize by platform)
+# Expo may create platform-specific subdirectories
+# Check for common output structures
 if [ -d "dist/web" ]; then
-  echo "Found dist/web, moving contents to dist..."
-  mv dist/web/* dist/ 2>/dev/null || true
-  rmdir dist/web 2>/dev/null || true
+  echo "Found dist/web, moving contents to dist root..."
+  cp -r dist/web/* dist/ 2>/dev/null || true
+  rm -rf dist/web 2>/dev/null || true
 fi
 
-# Verify build output
-if [ ! -d "dist" ] || [ -z "$(ls -A dist 2>/dev/null)" ]; then
-  echo "Error: Build output directory 'dist' is empty or not found"
+# Verify build output exists
+if [ ! -d "dist" ]; then
+  echo "Error: Build output directory 'dist' not found"
+  exit 1
+fi
+
+# Check if dist has content
+if [ -z "$(ls -A dist 2>/dev/null)" ]; then
+  echo "Error: Build output directory 'dist' is empty"
   exit 1
 fi
 
 echo "Build complete! Output in ./dist"
-ls -la dist/ | head -10
+echo "Build contents:"
+ls -la dist/ | head -15
 
